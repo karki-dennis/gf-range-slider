@@ -1,0 +1,150 @@
+
+[type=range] {
+    background-color: transparent;
+    cursor: pointer;
+}
+
+@supports ((-webkit-appearance: none) or (-moz-appearance: none) or (appearance: none)) {
+    [type=range] {
+        width: 100%;
+        height: 1.4rem;
+        padding: 0;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    [type=range]:focus {
+        outline: none;
+    }
+
+    [type=range]:focus::-webkit-slider-thumb {
+        box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    }
+
+    [type=range]:focus::-moz-range-thumb {
+        box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    }
+
+    [type=range]:focus::-ms-thumb {
+        box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    }
+
+    [type=range]::-moz-focus-outer {
+        border: 0;
+    }
+
+    [type=range]::-webkit-slider-thumb {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-top: -0.4rem;
+        background-color: #0d6efd;
+        border: 0;
+        border-radius: 1.5rem;
+        -webkit-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        -webkit-appearance: none;
+        appearance: none;
+    }
+
+    [type=range]::-webkit-slider-thumb:active {
+        background-color: #bed8fe;
+    }
+
+    [type=range]::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 0.65rem;
+        color: transparent;
+        cursor: pointer;
+        background-color: #dee2e6;
+        border-color: transparent;
+    }
+
+    [type=range]::-moz-range-thumb {
+        width: 1.5rem;
+        height: 1.5rem;
+        background-color: #0d6efd;
+        border: 0;
+        border-radius: 1.5rem;
+        -moz-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    [type=range]::-moz-range-thumb:active {
+        background-color: #bed8fe;
+    }
+
+    [type=range]::-moz-range-track {
+        width: 100%;
+        height: 0.65rem;
+        color: transparent;
+        cursor: pointer;
+        background-color: #dee2e6;
+        border-color: transparent;
+    }
+
+    [type=range]::-ms-thumb {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-top: 0;
+        margin-right: 0.2rem;
+        margin-left: 0.2rem;
+        background-color: #0d6efd;
+        border: 0;
+        border-radius: 1.5rem;
+        -ms-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        appearance: none;
+    }
+
+    [type=range]::-ms-thumb:active {
+        background-color: #bed8fe;
+    }
+
+    [type=range]::-ms-track {
+        width: 100%;
+        height: 0.65rem;
+        color: transparent;
+        cursor: pointer;
+        background-color: transparent;
+        border-color: transparent;
+    }
+
+    [type=range]::-ms-fill-lower {
+        background-color: #dee2e6;
+        border-radius: 1rem;
+    }
+
+    [type=range]::-ms-fill-upper {
+        margin-right: 15px;
+        background-color: #dee2e6;
+        border-radius: 1rem;
+    }
+
+    [type=range]:disabled {
+        pointer-events: none;
+    }
+
+    [type=range]:disabled::-webkit-slider-thumb {
+        background-color: #adb5bd;
+    }
+
+    [type=range]:disabled::-moz-range-thumb {
+        background-color: #adb5bd;
+    }
+
+    [type=range]:disabled::-ms-thumb {
+        background-color: #adb5bd;
+    }
+}
+input.gf-slider{
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+input.gf-slider:focus{
+    box-shadow: none !important;
+    outline: none !important;
+}
