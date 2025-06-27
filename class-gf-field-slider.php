@@ -52,6 +52,7 @@ class GF_Field_Slider extends GF_Field {
             'slider_step_setting',
             'slider_prefix_setting',
             'slider_suffix_setting',
+            'slider_format_setting',
             'default_value_setting',
         );
     }
@@ -63,98 +64,36 @@ class GF_Field_Slider extends GF_Field {
         $step = property_exists( $this, 'sliderStep' ) && is_numeric( $this->sliderStep ) ? $this->sliderStep : 1;
         $prefix = property_exists( $this, 'sliderPrefix' ) ? esc_html( $this->sliderPrefix ) : '';
         $suffix = property_exists( $this, 'sliderSuffix' ) ? esc_html( $this->sliderSuffix ) : '';
-
-        // Add CSS styles for the slider progress
-        $html = "
-        <style>
-            .gf-slider {
-                -webkit-appearance: none;
-                width: 100%;
-                height: 8px !important;
-                border-radius: 4px;
-                background: #ddd;
-                outline: none;
-                position: relative;
-            }
-            
-
-            .gf-slider-progress {
-                width: 0%;
-                height: 8px !important;
-                border-radius: 4px;
-                position: absolute;
-                background: #0271c2;
-                pointer-events: none;
-                z-index: 1;
-                left: 0;
-                top: 0;
-            }
-        </style>";
+        $format = property_exists( $this, 'sliderFormat' ) ? esc_attr( $this->sliderFormat ) : 'number';
 
         $field_id = "input_{$form['id']}_{$this->id}";
         $name     = "input_{$this->id}";
         $val      = $value !== '' ? esc_attr( $value ) : esc_attr( $min );
 
-        // Format initial value if prefix is GBP
+        // Format initial value based on format setting
         $display_val = $val;
-        if ($prefix === '£' || strtoupper($prefix) === 'GBP') {
+        if ($format === 'money') {
             $display_val = number_format((int)$val, 0, '.', ',');
         }
 
-        // Calculate initial progress percentage
-        $initial_progress = (((float)$val - (float)$min) / ((float)$max - (float)$min)) * 100;
-
-        // Build the slider + live value display
-        $html .= "<legend id='slider_value_{$field_id}' class='gfield-slider-value gfield_label gform-field-label'>{$prefix}&nbsp;{$display_val}&nbsp;{$suffix}</legend>";
-        $html .= "<div style='position: relative; width: 100%;'>";
-        $html .= "<div id='progress_{$field_id}' class='gf-slider-progress' style='width: {$initial_progress}%;'></div>";
-        $html .= "<input type='range' class='gf-slider' id='{$field_id}' name='{$name}' value='{$val}' min='{$min}' max='{$max}' step='{$step}' />";
+        // Build the slider markup
+        $html = "<div id='gf-nouislider' class='gf-slider-container'>";
+        $html .= "<legend class='gfield-slider-value gfield_label gform-field-label'>{$prefix}&nbsp;{$display_val}&nbsp;{$suffix}</legend>";
+        
+        // Hidden input for form submission
+        $html .= "<input type='hidden' name='{$name}' class='gf-slider-input' value='{$val}' />";
+        
+        // noUiSlider div with data attributes
+        $html .= "<div class='gf-slider' 
+            data-min='{$min}' 
+            data-max='{$max}' 
+            data-step='{$step}' 
+            data-value='{$val}' 
+            data-prefix='{$prefix}' 
+            data-suffix='{$suffix}'
+            data-format='{$format}'></div>";
+        
         $html .= "</div>";
-        $html .= "
-                <script>
-                    jQuery(function($){
-                        var slider = $('#{$field_id}');
-                        var progress = $('#progress_{$field_id}');
-                        
-                        // Function to update progress
-                        function updateProgress(value) {
-                            var min = parseFloat(slider.attr('min'));
-                            var max = parseFloat(slider.attr('max'));
-                            var percentage = ((value - min) / (max - min)) * 100;
-                            requestAnimationFrame(function() {
-                                progress.css('width', percentage + '%');
-                            });
-                        }
-
-                        slider.on('input change', function(){
-                            var prefix = '" . addslashes($prefix) . "';
-                            var suffix = '" . addslashes($suffix) . "';
-                            var value = this.value;
-                            
-                            // Update progress bar
-                            updateProgress(value);
-
-                            // GBP formatting if prefix is £ or GBP
-                            if (prefix === '£' || prefix.toUpperCase() === 'GBP') {
-                                value = new Intl.NumberFormat('en-GB', { 
-                                    minimumFractionDigits: 0,
-                                    maximumFractionDigits: 0,
-                                    useGrouping: true
-                                }).format(value);
-                            }
-                            
-                            $('#slider_value_{$field_id}').text(prefix + ' ' + value + ' ' + suffix);
-
-                            // Trigger the gform_input_change event that conditional logic depends on
-                            if (typeof gf_input_change === 'function') {
-                                gf_input_change(this, {$form['id']}, {$this->id});
-                            }
-                        });
-
-                        // Initialize progress on load
-                        updateProgress(slider.val());
-                    });
-                </script>";
 
         return $html;
     }
@@ -179,6 +118,13 @@ class GF_Field_Slider extends GF_Field {
             <li class="slider_step_setting field_setting">
                 <label for="slider_step"><?php esc_html_e( 'Slider Step', 'gravityforms' ); ?></label>
                 <input type="number" id="slider_step" onkeyup="SetFieldProperty('sliderStep', this.value);" />
+            </li>
+            <li class="slider_format_setting field_setting">
+                <label for="slider_format"><?php esc_html_e( 'Value Format', 'gravityforms' ); ?></label>
+                <select id="slider_format" onchange="SetFieldProperty('sliderFormat', this.value);">
+                    <option value="number"><?php esc_html_e( 'Regular Number', 'gravityforms' ); ?></option>
+                    <option value="money"><?php esc_html_e( 'Money (with thousand separators)', 'gravityforms' ); ?></option>
+                </select>
             </li>
             <li class="slider_prefix_setting field_setting">
                 <label for="slider_prefix"><?php esc_html_e( 'Prefix (e.g. $ or months)', 'gravityforms' ); ?></label>
@@ -210,6 +156,7 @@ class GF_Field_Slider extends GF_Field {
                 jQuery('#slider_step').val(field.sliderStep || 1);
                 jQuery('#slider_prefix').val(field.sliderPrefix || '');
                 jQuery('#slider_suffix').val(field.sliderSuffix || '');
+                jQuery('#slider_format').val(field.sliderFormat || 'number');
             });
         </script>
         <?php
