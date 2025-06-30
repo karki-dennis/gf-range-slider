@@ -19,7 +19,7 @@ This plugin extends Gravity Forms by adding a new "Slider" field type under Adva
 
 ## Installation
 
-1. Upload the plugin files to `/wp-content/plugins/gravity-forms-slider-field`
+1. Upload the plugin files to `/wp-content/plugins/gf-range-slider`
 2. Ensure Gravity Forms is installed and activated
 3. Activate the plugin through the WordPress 'Plugins' screen
 4. The slider field will appear under "Advanced Fields" when editing a form
