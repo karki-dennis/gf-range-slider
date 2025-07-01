@@ -53,7 +53,6 @@ class GF_Field_Slider extends GF_Field {
             'slider_prefix_setting',
             'slider_suffix_setting',
             'slider_format_setting',
-            'default_value_setting',
         );
     }
     // Front-end markup
@@ -68,12 +67,19 @@ class GF_Field_Slider extends GF_Field {
 
         $field_id = "input_{$form['id']}_{$this->id}";
         $name     = "input_{$this->id}";
-        $val      = $value !== '' ? esc_attr( $value ) : esc_attr( $min );
+        
+        // Check for default value first, then fall back to minimum
+        $default_value = property_exists( $this, 'defaultValue' ) && is_numeric( $this->defaultValue ) ? $this->defaultValue : $min;
+        $val      = $value !== '' ? esc_attr( $value ) : esc_attr( $default_value );
 
         // Format initial value based on format setting
         $display_val = $val;
         if ($format === 'money') {
             $display_val = number_format((int)$val, 0, '.', ',');
+            // Add + sign if at maximum value
+            if ((int)$val >= (int)$max) {
+                $display_val = $display_val . '+';
+            }
         }
 
         // Build the slider markup
@@ -157,6 +163,9 @@ class GF_Field_Slider extends GF_Field {
                 jQuery('#slider_prefix').val(field.sliderPrefix || '');
                 jQuery('#slider_suffix').val(field.sliderSuffix || '');
                 jQuery('#slider_format').val(field.sliderFormat || 'number');
+                
+                // Handle default value - use the standard GF field property
+                jQuery('#field_default_value').val(field.defaultValue || '');
             });
         </script>
         <?php

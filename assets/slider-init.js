@@ -37,7 +37,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Update the display and hidden input when slider changes
         slider.noUiSlider.on('update', function(values, handle) {
-            let displayValue = Math.round(values[handle]);
+            let rawValue = Math.round(values[handle]);
+            let displayValue = rawValue;
             
             // Format based on the format setting
             if (format === 'money') {
@@ -46,11 +47,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     maximumFractionDigits: 0,
                     useGrouping: true
                 }).format(displayValue);
+                
+                // Add + sign if at maximum value
+                if (rawValue >= max) {
+                    displayValue = displayValue + ' +';
+                }
             }
 
             // Update display and hidden input
             valueDisplay.textContent = `${prefix} ${displayValue} ${suffix}`.trim();
-            hiddenInput.value = displayValue;
+            hiddenInput.value = rawValue; // Store the raw value without the + sign
 
             // Trigger change event for Gravity Forms
             const event = new Event('change', { bubbles: true });
