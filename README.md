@@ -59,7 +59,7 @@ For support, bug reports, or feature requests, please use the GitHub issue track
 
 ## Credits
 
-- Developed by Digital Roo
+- Developed by Dennish Karki
 - Uses [noUiSlider](https://refreshless.com/nouislider/) for the slider interface
 
 ## License
