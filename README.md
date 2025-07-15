@@ -1,7 +1,4 @@
 
-<img width="452" height="92" alt="Screenshot at Jul 15 11-16-04 AM" src="https://github.com/user-attachments/assets/c98032d7-6a7d-46cf-8229-4ff5929cdfb1" />
-<img width="462" height="97" alt="Screenshot at Jul 15 11-15-51 AM" src="https://github.com/user-attachments/assets/e21afe0b-ca93-4214-bbca-712fda7eec1d" />
-
 # Gravity Forms Slider Field
 
 A WordPress plugin that adds a customizable slider field to Gravity Forms.
@@ -75,3 +72,11 @@ This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
 of the License, or (at your option) any later version.
+```
+# Frontend Looks
+<img width="452" height="92" alt="Screenshot at Jul 15 11-16-04 AM" src="https://github.com/user-attachments/assets/c98032d7-6a7d-46cf-8229-4ff5929cdfb1" />
+<img width="462" height="97" alt="Screenshot at Jul 15 11-15-51 AM" src="https://github.com/user-attachments/assets/e21afe0b-ca93-4214-bbca-712fda7eec1d" />
+
+# Backend Settings
+<img width="357" height="548" alt="Screenshot at Jul 15 11-18-57 AM" src="https://github.com/user-attachments/assets/203108eb-57d5-4118-8bd9-481952376686" />
+
