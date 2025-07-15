@@ -3,8 +3,8 @@
 Plugin Name: Gravity Forms – Slider Field
 Description: Adds a "Slider" field under Advanced Fields with configurable min, max & step.
 Version:     1.1
-Author:      Digital Roo
-Author URI:  https://digitalroo.co.uk
+Author:      Dennish Karki
+Author URI:  https://roastedpanda.com/
 License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html  
 Text Domain: gravity-forms-slider-field
