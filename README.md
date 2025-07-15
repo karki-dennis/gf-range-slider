@@ -1,3 +1,7 @@
+
+<img width="452" height="92" alt="Screenshot at Jul 15 11-16-04 AM" src="https://github.com/user-attachments/assets/c98032d7-6a7d-46cf-8229-4ff5929cdfb1" />
+<img width="462" height="97" alt="Screenshot at Jul 15 11-15-51 AM" src="https://github.com/user-attachments/assets/e21afe0b-ca93-4214-bbca-712fda7eec1d" />
+
 # Gravity Forms Slider Field
 
 A WordPress plugin that adds a customizable slider field to Gravity Forms.
